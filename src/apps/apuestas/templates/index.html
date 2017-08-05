@@ -1,0 +1,22 @@
+<h1>Hola {{username}}!!!</h1>
+<hr>
+<form class="" action="." method="post">
+  {% csrf_token %}
+  {{ form }}
+  <br>
+  <button type="submit" name="button">Guardar</button>
+</form>
+<hr>
+<ul>
+    {% for pregunta in pregunta_list %}
+      <li>
+        {{pregunta.text}}
+      </li>
+    {% endfor %}
+</ul>
+
+{% comment %}
+{% for x in username%}
+<h1>{{ x }}</h1>
+{% endfor %}
+{% endcomment %}
