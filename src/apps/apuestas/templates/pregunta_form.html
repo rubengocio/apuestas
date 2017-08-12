@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block body %}
+    <a href="/apuestas/"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span></a>
+    <form class="form-group" action="." method="post">
+        {% csrf_token %}
+        {{ form }}
+        <button class="btn btn-primary" type="submit" name="button">enviar</button>
+    </form>
+{% endblock %}
