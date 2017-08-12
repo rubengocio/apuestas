@@ -16,7 +16,11 @@ class PreguntaForm(forms.ModelForm):
 
         widgets = {
             'text': forms.TextInput(attrs={
-                'placeholder': 'Ingrese la pregunta.'
+                'placeholder': 'Ingrese la pregunta.',
+                'class': 'form-control'
+            }),
+            'due_date': forms.TextInput(attrs={
+                'class': 'form-control'
             }),
         }
 
