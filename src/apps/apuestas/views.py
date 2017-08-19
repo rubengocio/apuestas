@@ -7,8 +7,11 @@ from django.template import loader
 from .forms import PreguntaForm
 from .models import Pregunta
 from django.views import View
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
+@login_required
 def apuestas_list(request):
     form = PreguntaForm()
 
@@ -29,7 +32,7 @@ def apuestas_list(request):
     return HttpResponse(template.render(context,request))
 
 
-class PreguntaView(View):
+class PreguntaView(LoginRequiredMixin, View):
     form = PreguntaForm()
     template_name = "pregunta_form.html"
 
