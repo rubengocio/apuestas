@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
-from .forms import PreguntaForm
+from .forms import PreguntaForm, RespuestaForm
 from .models import Pregunta
 from django.views import View
 from django.contrib.auth.decorators import login_required
@@ -14,13 +14,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 @login_required
 def apuestas_list(request):
     form = PreguntaForm()
-
-    if request.method == 'POST':
-        form = PreguntaForm(data=request.POST)
-        if form.is_valid():
-            pregunta = form.save(commit=False)
-            pregunta.author = request.user
-            pregunta.save()
 
     template = loader.get_template('apuestas_list.html')
     pregunta_list = Pregunta.objects.all()
@@ -56,3 +49,23 @@ class PreguntaView(LoginRequiredMixin, View):
             'form': form
         }
         return render(request, self.template_name, context)
+
+
+@login_required
+def respuesta(request, id_pregunta):
+    template = loader.get_template('respuesta.html')
+    pregunta = Pregunta.objects.get(pk=id_pregunta)
+    form = RespuestaForm(pregunta, request.user)
+
+    if request.method == 'POST':
+        form = RespuestaForm(pregunta, request.user, data=request.POST)
+        if form.is_valid():
+            respuesta = form.save(commit=False)
+            respuesta.user = request.user
+            respuesta.save()
+
+    context = {
+        'form': form,
+        'pregunta': pregunta
+    }
+    return HttpResponse(template.render(context,request))

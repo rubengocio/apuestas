@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.contrib import admin
-from .models import Pregunta, Opcion
+from .models import Pregunta, Opcion, Respuesta
 
 
 def add_simbol_text(modeladmin,request,queryset):
@@ -28,5 +28,10 @@ class PreguntaAdmin(admin.ModelAdmin):
 	inlines = [OpcionHeadInLine, ]
 
 
+class RespuestaAdmin(admin.ModelAdmin):
+	list_display = ('id', 'user', 'question', 'option')
+
+	
 admin.site.register(Pregunta, PreguntaAdmin)
 admin.site.register(Opcion)
+admin.site.register(Respuesta,RespuestaAdmin)

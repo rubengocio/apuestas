@@ -15,11 +15,11 @@ class Pregunta(models.Model):
     due_date = models.DateTimeField('Fecha limite')
 
     def __unicode__(self):
-        return "%s" % self.texto
+        return "%s" % self.text
 
     @property
     def opciones(self):
-        return Opcion.objects.filter(quetion=self)
+        return Opcion.objects.filter(question=self)
 
 
 class Opcion(models.Model):
@@ -33,13 +33,21 @@ class Opcion(models.Model):
         unique_together = ('question', 'text')
 
     def __unicode__(self):
-        return "%s" % self.texto
+        return "%s" % self.text
 
 
 class Respuesta(models.Model):
     user = models.ForeignKey(User)
+    question = models.ForeignKey(Pregunta, blank=True, null=True)
     option = models.ForeignKey(Opcion)
     created_date = models.DateTimeField('Fecha de creacion:', auto_now_add=True)
 
     class Meta:
-        unique_together = ('user', 'option')
+        unique_together = ('user', 'question')
+
+    def __unicode__(self):
+        return "%s - %s - %s" % (self.user.username, self.question.text, self.option.text)
+
+    def save(self, *args, **kwargs):
+        self.question = self.option.question
+        return super(Respuesta, self).save(*args, **kwargs)
