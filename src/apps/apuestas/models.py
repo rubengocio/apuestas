@@ -35,6 +35,9 @@ class Opcion(models.Model):
     def __unicode__(self):
         return "%s" % self.text
 
+    def __str__(self):
+        return "%s" % self.text
+
 
 class Respuesta(models.Model):
     user = models.ForeignKey(User)
