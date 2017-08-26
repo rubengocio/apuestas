@@ -21,6 +21,13 @@ class Pregunta(models.Model):
     def opciones(self):
         return Opcion.objects.filter(question=self)
 
+    def get_results(self):
+        opciones = self.opciones
+        array = []
+        for opcion in opciones:
+            array.append((opcion.text, Respuesta.objects.filter(option=opcion).count()))
+        return array
+
 
 class Opcion(models.Model):
     question = models.ForeignKey(Pregunta, on_delete=models.CASCADE)
