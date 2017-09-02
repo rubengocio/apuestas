@@ -5,6 +5,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.template import loader
 from django.contrib.auth.forms import UserCreationForm
+from functions import json_response
 # Create your views here.
 
 
@@ -21,7 +22,10 @@ def register_user(request):
             grupo_jugador = Group.objects.get(name='Jugador')
             user.save()
             user.groups.add(grupo_jugador)
-
+            response = json_response().response_ok()
+        else:
+            response = json_response().response_error_form(form)
+        return response
     context = {
         'form': form
     }
