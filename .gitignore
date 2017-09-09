@@ -3,3 +3,4 @@ venv/
 /src/apuestas/local_settings.py
 log/
 /src/static/*
+/src/fab_tools/fab_settings.py
