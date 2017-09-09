@@ -1,2 +1,3 @@
 venv/
 *.pyc
+/src/apuestas/local_settings.py
