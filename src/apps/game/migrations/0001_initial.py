@@ -42,14 +42,14 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('created_date', models.DateTimeField(auto_now_add=True, verbose_name='Fecha de creacion:')),
-                ('option', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='apuestas.Opcion')),
+                ('option', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='game.Opcion')),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),
         migrations.AddField(
             model_name='opcion',
             name='question',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='apuestas.Pregunta'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='game.Pregunta'),
         ),
         migrations.AlterUniqueTogether(
             name='respuesta',

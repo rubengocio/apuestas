@@ -37,8 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'apps.apuestas',
+
+    'rest_framework.authtoken',
+    'rest_framework',
+
+    'apps.game',
     'apps.core',
+    'apps.api',
 ]
 
 MIDDLEWARE = [
@@ -110,6 +115,20 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    )
+}
+
 try:
     from .local_settings import *
 except Exception as e:
@@ -117,4 +136,3 @@ except Exception as e:
 
 # AFTER IMPORT LOCAL_SETTINGS
 LOGIN_REDIRECT_URL = '/apuestas/'
-
