@@ -18,8 +18,9 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.conf.urls.static import static
 from django.views.generic import TemplateView
-from apps.core.views import register_user
 from django.contrib.auth.views import logout
+
+from apps.core.views import register_user
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),

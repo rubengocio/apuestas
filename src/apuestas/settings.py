@@ -116,5 +116,5 @@ except Exception as e:
     pass
 
 # AFTER IMPORT LOCAL_SETTINGS
-
 LOGIN_REDIRECT_URL = '/apuestas/'
+
