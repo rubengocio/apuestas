@@ -45,6 +45,10 @@ class Opcion(models.Model):
     def __str__(self):
         return "%s" % self.text
 
+    @property
+    def question_text(self):
+        return self.question.text
+
 
 class Respuesta(models.Model):
     user = models.ForeignKey(User)

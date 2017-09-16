@@ -11,14 +11,14 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('apuestas', '0001_initial'),
+        ('game', '0001_initial'),
     ]
 
     operations = [
         migrations.AddField(
             model_name='respuesta',
             name='question',
-            field=models.ForeignKey(default=None, on_delete=django.db.models.deletion.CASCADE, to='apuestas.Pregunta'),
+            field=models.ForeignKey(default=None, on_delete=django.db.models.deletion.CASCADE, to='game.Pregunta'),
             preserve_default=False,
         ),
         migrations.AlterUniqueTogether(
