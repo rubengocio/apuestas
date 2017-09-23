@@ -28,13 +28,13 @@ def registrar_apuesta(request):
         respuesta_id = request.POST.get('respuesta_id', 0)
         Opcion = apps.get_model('game', 'Opcion')
         Respuesta = apps.get_model('game', 'Respuesta')
-        #user = User.objects.get(pk=usuario_id)
+        user = User.objects.get(pk=request.user.id)
         opcion = Opcion.objects.get(pk=respuesta_id)
-        apuesta = Apuestas(
+        respuesta = Respuesta(
             option=opcion,
             user=request.user
         )
-        apuesta.save()
+        respuesta.save()
         return Response({
             'status': 'ok'
         })
