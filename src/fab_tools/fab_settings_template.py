@@ -1,29 +1,29 @@
 USER = {
-    'test'. '',
+    'test': '',
     'prod': ''
 }
 
 PASSWORD = {
-    'test'. '',
+    'test': '',
     'prod': ''
 }
 
 PATH_PROJECT = {
-    'test'. '',
+    'test': '',
     'prod': ''
 }
 
 PATH_PROJECT_SRC = {
-    'test'. PATH_PROJECT['test'] + '/src',
+    'test': PATH_PROJECT['test'] + '/src',
     'prod': PATH_PROJECT['prod'] + '/src'
 }
 
 PATH_VENV = {
-    'test'. PATH_PROJECT['test'] + '/venv',
+    'test': PATH_PROJECT['test'] + '/venv',
     'prod': PATH_PROJECT['prod'] + '/venv'
 }
 
 PATH_VENV_ACTIVATE = {
-    'test'. PATH_VENV['test'] + '/bin/activate',
+    'test': PATH_VENV['test'] + '/bin/activate',
     'prod': PATH_VENV['prod'] + '/bin/activate'
 }
