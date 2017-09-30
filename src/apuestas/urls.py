@@ -20,7 +20,7 @@ from django.conf.urls.static import static
 from django.views.generic import TemplateView
 from django.contrib.auth.views import logout
 
-from apps.core.views import register_user
+from src.apps.core.views import register_user
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -31,3 +31,4 @@ urlpatterns = [
     url(r'^apuestas/', include('apps.game.urls')),
     url(r'^register/',register_user, name='register'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
