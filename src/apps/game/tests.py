@@ -12,6 +12,7 @@ class abm_apuestas(TestCase):
 
     def setUp(self):
         self.user = User(username='ruben_gocio@hotmail.com')
+        self.user.set_password('ABCabc123')
         self.user.save()
 
     def test_crear_pregunta(self):
@@ -45,6 +46,38 @@ class abm_apuestas(TestCase):
         client = Client()
         response = client.get('/kkkkk')
         print(response.status_code)
+
+    def test_login_post_password_error(self):
+        client = Client()
+        response = client.post(
+            '/accounts/login/',
+            {
+                'username':'ruben_gocio@hotmail.com',
+                'password':''
+            }
+        )
+        self.assertFormError(response, 'form', 'password', 'This field is required.')
+
+    def test_login_post_ok(self):
+        from django.contrib.auth.forms import UserCreationForm
+        form = UserCreationForm(data={'username':'ruben_gocio@hotmail.com','password1':'123456ABC','password2':'123456ABC'})
+        self.assertTrue(form.is_valid())
+
+
+    def test_login_post_ok2(self):
+        client = Client()
+        response = client.post(
+            '/accounts/login/',
+            {
+                'username':'ruben_gocio@hotmail.com',
+                'password':'ABCabc123'
+            }
+        )
+        #validator = False
+        #if response.status_code = 302:
+        #    validator = True
+        #self.assertTrue(validator)
+        self.assertRedirects(response,'/apuestas/')
 
 
 class jugar_apuestas(TestCase):
